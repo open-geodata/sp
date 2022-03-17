@@ -7,5 +7,4 @@
 - Regiões Metropolitanas
 - Aglomerações Urbanas
 
-
 http://www.fazenda.sp.gov.br/ua/defaultua.asp
