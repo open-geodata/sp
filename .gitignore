@@ -1,6 +1,8 @@
 # Data
 data/lixo/
-
+data/gjson/
+data/gpkg/
+data/shps/
 
 # IDEs
 .idea/
