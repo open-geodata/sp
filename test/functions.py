@@ -1,9 +1,7 @@
 import os
 import requests
+from osgeo import ogr
 from zipfile import ZipFile
-
-
-
 
 def get_download(url, filename, path):
     # Define o nome do arquivo, com diretório, que será salvo
@@ -14,8 +12,7 @@ def get_download(url, filename, path):
     with open(zipfile, 'wb') as out:
         for chunk in r.iter_content(chunk_size=128):
             out.write(chunk)
-    print('File "{}" download in "{}" directory.'.format(filename, path))
-    
+    print('File "{}" download in "{}" directory.'.format(filename, path))   
     
     
 
@@ -38,4 +35,21 @@ def unzip(filename, path):
             print('File "{}" extracted as "{}" in "{}" directory.'.format(file, os.path.splitext(filename)[0]+ext, path))
 
     # Remove file
-    os.remove(zipfile)
+    os.remove(zipfile)   
+    
+    
+    
+    
+def delete_shapefile(shp_filepath):
+    # Set Driver
+    driver = ogr.GetDriverByName("ESRI Shapefile")
+
+    # Delete shapefile
+    if os.path.exists(shp_filepath):
+        driver.DeleteDataSource(shp_filepath)
+
+    # Delete other files
+    for i in os.listdir(os.path.dirname(shp_filepath)):
+        if i.split('.')[0] == os.path.basename(shp_filepath):
+            os.remove(os.path.join(os.path.dirname(shp_filepath), i))
+            print('Delete ok')
